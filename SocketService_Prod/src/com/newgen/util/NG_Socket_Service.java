@@ -360,6 +360,32 @@ class doComms implements Runnable {
                     writeData(out, result);
                 }
             }
+ 		   
+ 		  //AR Verify customer REquest
+		   if ("VerifyCustomerRequest".equalsIgnoreCase(varServiceName)) {
+               loggern.info("Welcome TO VERIFY CUSTOMER REQUEST");
+               String result = "";
+               try {
+               	 Properties urlFile = new Properties();
+                    urlFile.load(new FileInputStream("config.properties"));
+                    String urlString="";
+                    urlString = urlFile.getProperty("ARFINACLEAPIURL");
+                    loggern.info("urlString ::"+urlString);
+                    
+                   outputResponseXml = connecttoFinacle.callServiceFI(inputXML,urlString,"VERIFY_CUST");
+                   loggern.info("Response Final==" + outputResponseXml);
+                       result = outputResponseXml;
+                       loggern.info("result:::--" + result);
+                       System.out.println("result:::--" + result);
+                       writeData(out, result);
+               } catch (Exception e) {
+                   result = "FAILED~" + "<root><Failed>Exception Occured check socket service</Failed></root>";
+                   loggern.info("result:::--" + result);
+                   System.out.println("result:::--" + result);
+                   writeData(out, result);
+               }
+           }
+		   
  		   //update retail customer
  		   if ("UpdateRetailCustRiskScore".equalsIgnoreCase(varServiceName)) {
                 loggern.info("Welcome TO UPDATE Retail customer risk score");
