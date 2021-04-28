@@ -308,7 +308,22 @@ class doComms implements Runnable {
 
             loggern.info("inputXML==" + inputXML);
             loggern.info("callName==" + varServiceName);
-            
+
+            if ("TOKENVALIDATION".equalsIgnoreCase(varServiceName)){
+                loggern.info("Welcome To tokenvalidation");
+                String result = "";
+                try {
+                    result = CTEW.callService(inputXML,varServiceName);
+                    loggern.info("result:::--" + result);
+                    System.out.println("result:::--" + result);
+                    writeData(out, result);
+                } catch (Exception e) {
+                    result = e.getMessage();
+                    loggern.info("result:::--" + result);
+                    System.out.println("result:::--" + result);
+                    writeData(out, result);
+                }
+            }
             if("REMOVELIEN".equalsIgnoreCase(varServiceName)){
                 loggern.info("welcome to REMOVE LIEN SERVICE");
                 String result = "";
