@@ -102,24 +102,24 @@ public class ConnectToexternalWebService {
                 
                 if (ServiceName.equalsIgnoreCase("fetchAccountBVN"))
                 {
-                	String soapAction="http://tempuri.org/IService/BVNEnquiry2";
+                	String soapAction=p.getProperty("BVNACTION");
+                    loggern.info("soap action" + soapAction);
                     String SOAPResponse_xml = NGWebServiceClient.ExecuteWs(SOAP_inxml, EndPointurl,soapAction);
                     loggern.info("SOAPResponse_xml" + SOAPResponse_xml);
                     responseXML=SOAPResponse_xml;
                     return responseXML; 
                 }
                else if (ServiceName.equalsIgnoreCase("TOKENVALIDATION")){
-                    String soapAction="http://tempuri.org/IAuthWrapper/AuthMethod";
+                    String soapAction=p.getProperty("TOKENVALIDATIONACTION");
+                    loggern.info("soap action" + soapAction);
                     String SOAPResponse_xml = NGWebServiceClient.ExecuteWs(SOAP_inxml, EndPointurl,soapAction);
                     loggern.info("SOAPResponse_xml" + SOAPResponse_xml);
                     return SOAPResponse_xml;
                 }
                 else {
                 loggern.info("EndPointurl" + EndPointurl);
-                //EndPointurl = "http://testsmsapi.dfcugroup.com/FinwebserviceApp/Webservice.asmx";
                 loggern.info("SOAP_inxml" + SOAP_inxml);
                 String SOAPResponse_xml = NGWebServiceClient.ExecuteWs(SOAP_inxml, EndPointurl);
-                
                 loggern.info("SOAPResponse_xml" + SOAPResponse_xml);
                 responseXML=SOAPResponse_xml;
                 return responseXML;  
