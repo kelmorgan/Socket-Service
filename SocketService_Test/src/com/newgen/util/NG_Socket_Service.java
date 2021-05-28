@@ -400,7 +400,79 @@ class doComms implements Runnable {
                     writeData(out, result);
                 }
             }
-            
+
+            //Get Customer Account Details from old finacle
+            if ("OLDCURRENTACCOUNT".equalsIgnoreCase(varServiceName)) {
+                loggern.info("Welcome To FETCH CURRENT ACCT api call");
+                String result = "";
+                try {
+                    Properties urlFile = new Properties();
+                    urlFile.load(new FileInputStream("config.properties"));
+                    String urlString="";
+                    urlString = urlFile.getProperty("OLDCURRENTACCOUNTURL");
+                    loggern.info("urlString ::"+urlString);
+
+                    outputResponseXml = connecttoFinacle.callServiceFI(inputXML,urlString,"ODAACC_INQ");
+                    loggern.info("Response Final==" + outputResponseXml);
+                    result = outputResponseXml;
+                    loggern.info("result:::--" + result);
+                    System.out.println("result:::--" + result);
+                    writeData(out, result);
+                } catch (Exception e) {
+                    result = "FAILED~" + "<root><Failed>Exception Occured check socket service</Failed></root>";
+                    loggern.info("result:::--" + result);
+                    System.out.println("result:::--" + result);
+                    writeData(out, result);
+                }
+            }
+            if ("OLDSAVINGACCOUNT".equalsIgnoreCase(varServiceName)) {
+                loggern.info("Welcome To FETCH SAVINGS ACCT api call");
+                String result = "";
+                try {
+                    Properties urlFile = new Properties();
+                    urlFile.load(new FileInputStream("config.properties"));
+                    String urlString="";
+                    urlString = urlFile.getProperty("OLDSAVINGACCOUNTURL");
+                    loggern.info("urlString ::"+urlString);
+
+                    outputResponseXml = connecttoFinacle.callServiceFI(inputXML,urlString,"SBACC_INQ");
+                    loggern.info("Response Final==" + outputResponseXml);
+                    result = outputResponseXml;
+                    loggern.info("result:::--" + result);
+                    System.out.println("result:::--" + result);
+                    writeData(out, result);
+                } catch (Exception e) {
+                    result = "FAILED~" + "<root><Failed>Exception Occured check socket service</Failed></root>";
+                    loggern.info("result:::--" + result);
+                    System.out.println("result:::--" + result);
+                    writeData(out, result);
+                }
+            }
+            if ("OLDSPECIALACCOUNT".equalsIgnoreCase(varServiceName)) {
+                loggern.info("Welcome To FETCH SPECIAL api call");
+                String result = "";
+                try {
+                    Properties urlFile = new Properties();
+                    urlFile.load(new FileInputStream("config.properties"));
+                    String urlString="";
+                    urlString = urlFile.getProperty("OLDSPECIALACCOUNTURL");
+                    loggern.info("urlString ::"+urlString);
+
+                    outputResponseXml = connecttoFinacle.callService(inputXML,urlString,"CAAcctInq");
+                    loggern.info("Response Final==" + outputResponseXml);
+                    result = outputResponseXml;
+                    loggern.info("result:::--" + result);
+                    System.out.println("result:::--" + result);
+                    writeData(out, result);
+                } catch (Exception e) {
+                    result = "FAILED~" + "<root><Failed>Exception Occured check socket service</Failed></root>";
+                    loggern.info("result:::--" + result);
+                    System.out.println("result:::--" + result);
+                    writeData(out, result);
+                }
+            }
+
+
             /*Get Customer Account Details*/
             if ("CURRENTACCOUNT".equalsIgnoreCase(varServiceName)) {
                 loggern.info("Welcome To FETCH CURRENT ACCT api call");
