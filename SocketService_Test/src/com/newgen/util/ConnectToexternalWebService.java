@@ -7,13 +7,12 @@ import org.apache.log4j.Logger;
 
 public class ConnectToexternalWebService {
     
-    private static Logger loggern = Logger.getLogger("consoleLogger");
-    final Logger integratioAOLogger = Logger.getLogger("mLogger");
+    private static final Logger logger = Logger.getLogger("consoleLogger");
     String EndPointurl = "";
     
     public String callService(String requestXML,String varServiceName ) throws Exception 
 	{
-            loggern.info("inside call service method");
+            logger.info("inside call service method");
             String responseXML="";
             responseXML=sendRequest(requestXML,varServiceName); 
             return responseXML;
@@ -21,7 +20,7 @@ public class ConnectToexternalWebService {
     
     private String sendRequest(String SOAP_inxml,String ServiceName) 
 	{
-            String responseXML="";
+            String responseXML;
             try
 		{ 
                 Properties p = new Properties();
@@ -103,24 +102,24 @@ public class ConnectToexternalWebService {
                 if (ServiceName.equalsIgnoreCase("fetchAccountBVN"))
                 {
                 	String soapAction=p.getProperty("BVNACTION");
-                    loggern.info("soap action" + soapAction);
+                    logger.info("soap action" + soapAction);
                     String SOAPResponse_xml = NGWebServiceClient.ExecuteWs(SOAP_inxml, EndPointurl,soapAction);
-                    loggern.info("SOAPResponse_xml" + SOAPResponse_xml);
+                    logger.info("SOAPResponse_xml" + SOAPResponse_xml);
                     responseXML=SOAPResponse_xml;
                     return responseXML; 
                 }
                else if (ServiceName.equalsIgnoreCase("TOKENVALIDATION")){
                     String soapAction=p.getProperty("TOKENVALIDATIONACTION");
-                    loggern.info("soap action" + soapAction);
+                    logger.info("soap action" + soapAction);
                     String SOAPResponse_xml = NGWebServiceClient.ExecuteWs(SOAP_inxml, EndPointurl,soapAction);
-                    loggern.info("SOAPResponse_xml" + SOAPResponse_xml);
+                    logger.info("SOAPResponse_xml" + SOAPResponse_xml);
                     return SOAPResponse_xml;
                 }
                 else {
-                loggern.info("EndPointurl" + EndPointurl);
-                loggern.info("SOAP_inxml" + SOAP_inxml);
+                logger.info("EndPointurl" + EndPointurl);
+                logger.info("SOAP_inxml" + SOAP_inxml);
                 String SOAPResponse_xml = NGWebServiceClient.ExecuteWs(SOAP_inxml, EndPointurl);
-                loggern.info("SOAPResponse_xml" + SOAPResponse_xml);
+                logger.info("SOAPResponse_xml" + SOAPResponse_xml);
                 responseXML=SOAPResponse_xml;
                 return responseXML;  
                 }
