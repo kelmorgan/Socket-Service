@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.net.*;
-import java.nio.charset.StandardCharsets;
 
 
 public class ConnectToFinacle {
@@ -40,7 +39,7 @@ public class ConnectToFinacle {
 	                       logger.info("urlString : " + urlString);
 	                       logger.info("SOAPAction : " + ipXML);
 				       
-				getResponse = urlString+"?appCode=" + URLEncoder.encode(appCode, StandardCharsets.UTF_8) + "&FIData="+ URLEncoder.encode(ipXML, StandardCharsets.UTF_8);
+				getResponse = urlString+"?appCode=" + URLEncoder.encode(appCode, "UTF-8") + "&FIData="+ URLEncoder.encode(ipXML, "UTF-8");
 				URL url = new URL(getResponse);
 	                        connection = url.openConnection();
 	                        connection.setDoOutput(true);
@@ -98,7 +97,7 @@ public class ConnectToFinacle {
 	                       logger.info("urlString : " + urlString);
 	                       logger.info("SOAPAction : " + ipXML);
 				       
-				getResponse = urlString+"?AppCode=" + URLEncoder.encode(appCode, StandardCharsets.UTF_8) + "&FIData="+ URLEncoder.encode(ipXML, StandardCharsets.UTF_8);
+				getResponse = urlString+"?AppCode=" + URLEncoder.encode(appCode, "UTF-8") + "&FIData="+ URLEncoder.encode(ipXML, "UTF-8");
 				URL url = new URL(getResponse);
 	                        connection = url.openConnection();
 	                        connection.setDoOutput(true);

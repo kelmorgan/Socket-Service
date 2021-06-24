@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 import java.util.logging.Level;
 
@@ -22,14 +21,14 @@ public class doComms implements Runnable, Constants {
         try {
             final DataOutputStream dataOutputStream = new DataOutputStream(this.server.getOutputStream());
             final byte[] buffer = new byte[1000000];
-            System.out.println("in write" + input.getBytes(StandardCharsets.UTF_16LE).length);
+            System.out.println("in write" + input.getBytes("UTF-16LE").length);
             if (input.length() > 0) {
-                final InputStream in = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_16LE));
+                final InputStream in = new ByteArrayInputStream(input.getBytes("UTF-16LE"));
                 System.out.println("intostlength" + in);
                 StringBuilder str = new StringBuilder();
                 int len;
                 while ((len = in.read(buffer)) > 0) {
-                    str.append(new String(buffer, StandardCharsets.UTF_16LE));
+                    str.append(new String(buffer, "UTF-16LE"));
                     dataOutputStream.write(buffer, 0, len);
                 }
                 System.out.println("--------------writeUTF called--------------------");
@@ -40,16 +39,45 @@ public class doComms implements Runnable, Constants {
         }
     }
 
+    private void writeDataNew( String output){
+        try {
+            final DataOutputStream out = new DataOutputStream(this.server.getOutputStream());
+            byte[] dataArray = output.getBytes("UTF-8");
+            out.writeInt(dataArray.length);
+            out.write(dataArray);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private String readDataNew (DataInputStream in){
+        String data =  "";
+        try {
+            int dataLength = in.readInt();
+            System.out.println("data received length: "+ dataLength);
+            byte [] dataBuffer = new byte[dataLength];
+            in.readFully(dataBuffer);
+            data = new String(dataBuffer,"UTF-8");
+            System.out.println("Received data: "+ data);
+            return data;
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return data;
+    }
+
     private String readData(DataInputStream xmlDataInputStream) throws IOException {
 
         String receivedData = "";
         try {
             byte[] readBuffer = new byte[1000000];
             int num = xmlDataInputStream.read(readBuffer);
+            System.out.println("Read DATA num: "+ num);
             if (num > 0) {
                 byte[] arrayBytes = new byte[num];
                 System.arraycopy(readBuffer, 0, arrayBytes, 0, num);
-                receivedData = new String(arrayBytes, StandardCharsets.UTF_16LE);
+                receivedData = new String(arrayBytes, "UTF-16LE");
 
                 System.out.println("Received message :" + receivedData);
             } else {
@@ -1105,6 +1133,68 @@ public class doComms implements Runnable, Constants {
                         logger.info("result:::--" + result);
                         System.out.println("result:::--" + result);
                         writeData(result);
+                    }
+                }
+                break;
+                case CI_STAFF_DETAILS:{
+                    logger.info("Welcome To FetchCIStaffDetails");
+                    String result = "";
+                    String StaffID = arg[2];
+                    try {
+                        outputResponseXml = CTEW.callService(inputXML,varServiceName);
+                        logger.info("Response Final==" + outputResponseXml);
+
+                        xmlParser = new XMLParser(outputResponseXml);
+                        varBody = xmlParser.getValueOf("ns0:EBSTSTOutput");
+                        logger.info("before parser varBody:::: " + varBody);
+                        xmlParser = new XMLParser(varBody);
+                        logger.info("Status of varBody:::: " + varBody);
+                        String FULL_NAME = xmlParser.getValueOf("ns0:FULL_NAME");
+                        logger.info("FULL_NAME:::" + FULL_NAME);
+                        String DEPARTMENT = xmlParser.getValueOf("ns0:DEPARTMENT");
+                        logger.info("DEPARTMENT:::" + DEPARTMENT);
+                        String COST_CENT = xmlParser.getValueOf("ns0:COST_CENT");
+                        logger.info("COST_CENT:::" + COST_CENT);
+                        String GRADE = xmlParser.getValueOf("ns0:GRADE");
+                        logger.info("GRADE:::" + GRADE);
+                        String phone_num = xmlParser.getValueOf("ns0:phone_num");
+                        logger.info("phone_num:::" + phone_num);
+                        String EMAIL_ADDRESS = xmlParser.getValueOf("ns0:EMAIL_ADDRESS");
+                        logger.info("EMAIL_ADDRESS:::" + EMAIL_ADDRESS);
+                        String REPORTING_MANAGER = xmlParser.getValueOf("ns0:REPORTING_MANAGER");
+                        logger.info("REPORTING_MANAGER:::" + REPORTING_MANAGER);
+                        String REPORTING_MANAGER_NO = xmlParser.getValueOf("ns0:REPORTING_MANAGER_NO");
+                        logger.info("REPORTING_MANAGER_NO:::" + REPORTING_MANAGER_NO);
+                        String jobTitle = xmlParser.getValueOf("ns0:JOB");
+                        logger.info("jobTitle:::" + jobTitle);
+
+                        if(FULL_NAME.equals("")){
+
+                            header = "<EE_EAI_HEADER><MsgFormat>CUSTOMER_EXPOSURE</MsgFormat>"
+                                    + "<MsgVersion>0001</MsgVersion><RequestorChannelId>DFCU</RequestorChannelId>"
+                                    + "<RequestorUserId>DFCUUSER</RequestorUserId><RequestorLanguage>E</RequestorLanguage>"
+                                    + "<RequestorSecurityInfo>secure</RequestorSecurityInfo><ReturnCode>0000</ReturnCode>"
+                                    + "<ReturnDesc>Staff does not Exist</ReturnDesc><MessageId>LOS153984246089589</MessageId>"
+                                    + "<Extra1>DFCU||SHELL.JOHN</Extra1><Extra2>2018-10-18T10:01:02.490+04:00</Extra2></EE_EAI_HEADER>";
+                        }
+                        else{
+                            header = "<EE_EAI_HEADER><MsgFormat>CUSTOMER_EXPOSURE</MsgFormat>"
+                                    + "<MsgVersion>0001</MsgVersion><RequestorChannelId>DFCU</RequestorChannelId>"
+                                    + "<RequestorUserId>DFCUUSER</RequestorUserId><RequestorLanguage>E</RequestorLanguage>"
+                                    + "<RequestorSecurityInfo>secure</RequestorSecurityInfo><ReturnCode>0000</ReturnCode>"
+                                    + "<ReturnDesc>Sucessful</ReturnDesc><MessageId>LOS153984246089589</MessageId>"
+                                    + "<Extra1>DFCU||SHELL.JOHN</Extra1><Extra2>2018-10-18T10:01:02.490+04:00</Extra2></EE_EAI_HEADER>";
+                        }
+                        result = "SUCCESS~" + "<root>" + header + "<StaffDetails><SanctionDate></SanctionDate><Department>"+DEPARTMENT+"</Department><Email>"+EMAIL_ADDRESS+"</Email><Address></Address><StaffID>"+StaffID+"</StaffID><PhoneNo>"+phone_num+"</PhoneNo><Branch></Branch><StaffCategory></StaffCategory><Grade>"+GRADE+"</Grade><CaseOutCome></CaseOutCome><StaffName>"+FULL_NAME+"</StaffName><ReportingManager>"+REPORTING_MANAGER+"</ReportingManager><COST_CENT>"+COST_CENT+"</COST_CENT><JOB>"+jobTitle+"</JOB></StaffDetails></root>";
+                        logger.info("result:::--" + result);
+                        System.out.println("result:::--" + result);
+                        writeData( result);
+
+                    } catch (Exception e) {
+                        result = "FAILED~" + "<root>" + errorHeader + "<StaffDetails><SanctionDate></SanctionDate><Department></Department><Email></Email><Address></Address><StaffID></StaffID><PhoneNo></PhoneNo><Branch></Branch><StaffCategory></StaffCategory><Grade></Grade><CaseOutCome></CaseOutCome><StaffName></StaffName><ReportingManager></ReportingManager><COST_CENT></COST_CENT><JOB></JOB></StaffDetails></root>";
+                        logger.info("result:::--" + result);
+                        System.out.println("result:::--" + result);
+                        writeData( result);
                     }
                 }
                 break;

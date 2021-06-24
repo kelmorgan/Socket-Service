@@ -36,6 +36,7 @@ public interface Constants {
     String UPDATE_RETAIL_RISK_SCORE = "UpdateRetailCustRiskScore";
     String UPDATE_CORP_RISK_SCORE = "UpdateCorpCustRiskScore";
     String PLACE_LIEN = "placeLien";
+    String CI_STAFF_DETAILS = "FetchCIStaffDetails";
 
     //AppCode
 
