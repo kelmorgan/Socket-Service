@@ -118,14 +118,14 @@ class doComms implements Runnable {
             final DataOutputStream dout = new DataOutputStream(this.server.getOutputStream());
             final byte[] buffer = new byte[1000000];
             final String return_message = input;
-            System.out.println("in write" + return_message.getBytes("UTF-16LE").length);
+            System.out.println("in write" + return_message.getBytes("UTF-8").length);
             if (return_message != null && return_message.length() > 0) {
-                final InputStream in = new ByteArrayInputStream(return_message.getBytes("UTF-16LE"));
+                final InputStream in = new ByteArrayInputStream(return_message.getBytes("UTF-8"));
                 System.out.println("intostlength" + in .toString());
                 String str = "";
                 int len;
                 while ((len = in .read(buffer)) > 0) {
-                    str = String.valueOf(str) + new String(buffer, "UTF-16LE");
+                    str = String.valueOf(str) + new String(buffer, "UTF-8");
                     dout.write(buffer, 0, len);
                 }
                 System.out.println("--------------writeUTF called--------------------");
@@ -181,7 +181,7 @@ class doComms implements Runnable {
             if (num > 0) {
                 byte[] arrayBytes = new byte[num];
                 System.arraycopy(readBuffer, 0, arrayBytes, 0, num);
-                recvedMessage = new String(arrayBytes, "UTF-16LE");
+                recvedMessage = new String(arrayBytes, "UTF-8");
 
                 System.out.println("Received message :" + recvedMessage);
             } else {
@@ -382,7 +382,7 @@ class doComms implements Runnable {
                     writeData(out, result);
                 }
             }
-            
+
             /*ACCOUNT RECREATION  Process*/   /*SEND ADDRESS FOR SEACH*/
 			
  		   if ("AVRSearch".equalsIgnoreCase(varServiceName)) {
