@@ -1185,13 +1185,13 @@ public class doComms implements Runnable, Constants {
                                     + "<ReturnDesc>Sucessful</ReturnDesc><MessageId>LOS153984246089589</MessageId>"
                                     + "<Extra1>DFCU||SHELL.JOHN</Extra1><Extra2>2018-10-18T10:01:02.490+04:00</Extra2></EE_EAI_HEADER>";
                         }
-                        result = "SUCCESS~" + "<root>" + header + "<StaffDetails><SanctionDate></SanctionDate><Department>"+DEPARTMENT+"</Department><Email>"+EMAIL_ADDRESS+"</Email><Address></Address><StaffID>"+StaffID+"</StaffID><PhoneNo>"+phone_num+"</PhoneNo><Branch></Branch><StaffCategory></StaffCategory><Grade>"+GRADE+"</Grade><CaseOutCome></CaseOutCome><StaffName>"+FULL_NAME+"</StaffName><ReportingManager>"+REPORTING_MANAGER+"</ReportingManager><COST_CENT>"+COST_CENT+"</COST_CENT><JOB>"+jobTitle+"</JOB></StaffDetails></root>";
+                        result = "SUCCESS~" + "<root>" + header + "<StaffDetails><SanctionDate></SanctionDate><Department>"+DEPARTMENT+"</Department><Email>"+EMAIL_ADDRESS+"</Email><Address></Address><StaffID>"+StaffID+"</StaffID><PhoneNo>"+phone_num+"</PhoneNo><Branch></Branch><StaffCategory></StaffCategory><Grade>"+GRADE+"</Grade><CaseOutCome></CaseOutCome><StaffName>"+FULL_NAME+"</StaffName><ReportingManager>"+REPORTING_MANAGER+"</ReportingManager><ReportingManagerNo>"+REPORTING_MANAGER_NO+"</ReportingManagerNo><COST_CENT>"+COST_CENT+"</COST_CENT><JOB>"+jobTitle+"</JOB></StaffDetails></root>";
                         logger.info("result:::--" + result);
                         System.out.println("result:::--" + result);
                         writeData( result);
 
                     } catch (Exception e) {
-                        result = "FAILED~" + "<root>" + errorHeader + "<StaffDetails><SanctionDate></SanctionDate><Department></Department><Email></Email><Address></Address><StaffID></StaffID><PhoneNo></PhoneNo><Branch></Branch><StaffCategory></StaffCategory><Grade></Grade><CaseOutCome></CaseOutCome><StaffName></StaffName><ReportingManager></ReportingManager><COST_CENT></COST_CENT><JOB></JOB></StaffDetails></root>";
+                        result = "FAILED~" + "<root>" + errorHeader + "<StaffDetails><SanctionDate></SanctionDate><Department></Department><Email></Email><Address></Address><StaffID></StaffID><PhoneNo></PhoneNo><Branch></Branch><StaffCategory></StaffCategory><Grade></Grade><CaseOutCome></CaseOutCome><StaffName></StaffName><ReportingManager></ReportingManager><ReportingManagerNo></ReportingManagerNo><COST_CENT></COST_CENT><JOB></JOB></StaffDetails></root>";
                         logger.info("result:::--" + result);
                         System.out.println("result:::--" + result);
                         writeData( result);
