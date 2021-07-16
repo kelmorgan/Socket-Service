@@ -118,6 +118,11 @@ public class doComms implements Runnable, Constants {
             urlFile.load(new FileInputStream("config.properties"));
 
             switch (varServiceName){
+                case FREEZE_ACCOUNT:{
+                    logger.info("Welcome To Freeze account service");
+                    sendFinacleBpmRequest(inputXML,FINACLEBPMURL,FREEZE_ACCOUNT_APPCODE);
+                    break;
+                }
                 case TOKEN_VALIDATION:{
                     logger.info("Welcome To tokenvalidation");
                     String result = "";
@@ -1239,6 +1244,58 @@ public class doComms implements Runnable, Constants {
                 //input="<Status>FAILURE</Status>"+ N.err;
                 input = NG_Socket_Service.err;
             }
+        }
+    }
+
+    public void sendFinacleBpmRequest(String request, String endpoint, String appCode) throws IOException {
+        try {
+            Properties urlFile = new Properties();
+            urlFile.load(new FileInputStream(CONFIG_FILE));
+            String urlString = urlFile.getProperty(endpoint);
+            logger.info("urlString ::" + urlString);
+
+            String  output = new ConnectToFinacle().callService(request, urlString,appCode);
+            logger.info("Response Final==" + output);
+            System.out.println("result:::--" + output);
+            writeData(output);
+        } catch (Exception e) {
+            String result = "FAILED~" + "<root><Status>Failed</Status><ErrorMsg>Error occurred in SocketService contact Admin</ErrorMsg></root>";
+            logger.info("result:::--" + result);
+            System.out.println("result:::--" + result);
+            writeData(result);
+        }
+    }
+
+    public void sendFinacleFiRequest (String request,String endpoint,String appCode) throws IOException {
+        try {
+            Properties urlFile = new Properties();
+            urlFile.load(new FileInputStream(CONFIG_FILE));
+            String urlString = urlFile.getProperty(endpoint);
+            logger.info("urlString ::" + urlString);
+
+            String  output = new ConnectToFinacle().callServiceFI(request, urlString,appCode);
+            logger.info("Response Final==" + output);
+            System.out.println("result:::--" + output);
+            writeData(output);
+        } catch (Exception e) {
+            String result = "FAILED~" + "<root><Status>Failed</Status><ErrorMsg>Error occurred in SocketService contact Admin</ErrorMsg></root>";
+            logger.info("result:::--" + result);
+            System.out.println("result:::--" + result);
+            writeData(result);
+        }
+    }
+    public void sendSoapRequest(String request, String serviceName) throws IOException {
+
+        try {
+            String output = new ConnectToexternalWebService().callService(request, serviceName);
+            logger.info("result:::--" + output);
+            System.out.println("result:::--" + output);
+            writeData(output);
+        } catch (Exception e) {
+            String result = "FAILED~" + "<root><Status>Failed</Status><ErrorMsg>Error occurred in SocketService contact Admin</ErrorMsg></root>";
+            logger.info("result:::--" + result);
+            System.out.println("result:::--" + result);
+            writeData(result);
         }
     }
 

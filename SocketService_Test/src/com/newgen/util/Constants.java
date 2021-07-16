@@ -37,6 +37,7 @@ public interface Constants {
     String UPDATE_CORP_RISK_SCORE = "UpdateCorpCustRiskScore";
     String PLACE_LIEN = "placeLien";
     String CI_STAFF_DETAILS = "FetchCIStaffDetails";
+    String FREEZE_ACCOUNT = "FREEZEACCOUNT";
 
     //AppCode
 
@@ -53,4 +54,12 @@ public interface Constants {
     String UPDATE_RETAIL_RISK_SCORE_APPCODE = "CPC_FI";
     String UPDATE_CORP_RISK_SCORE_APPCODE = "CORPCIF_MODIFY";
     String PLACE_LIEN_APPCODE = "LLAcctLienAdd";
+    String FREEZE_ACCOUNT_APPCODE = "CardFreeze";
+
+    //EndpointUrl
+    String FINACLEBPMURL = "FINACLEBPMURL";
+    String FINACLEFIURL = "FINACLECUSTOMFIURL";
+
+    //Config
+    String CONFIG_FILE = "config.properties";
 }
