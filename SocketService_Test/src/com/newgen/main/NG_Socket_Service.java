@@ -1,5 +1,6 @@
-package com.newgen.util;
+package com.newgen.main;
 
+import com.newgen.process.doComms;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
