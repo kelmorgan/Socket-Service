@@ -121,13 +121,18 @@ public class doComms implements Runnable, Constants {
             logger.info("callName==" + serviceName);
 
             switch (serviceName){
+                case STAFF_DETAILS: {
+                    logger.info("Welcome To staff details service");
+                    sendSoapRequest(request,LoadProp.fetchStaffDetailsUrl,empty);
+                    break;
+                }
                 case FREEZE_ACCOUNT:{
-                    logger.info("Welcome To Freeze account service");
-                    sendFinacleBpmRequest(request, FINACLEPREPRODBPMURL,FREEZE_ACCOUNT_APPCODE);
+                        logger.info("Welcome To Freeze account service");
+                    sendFinacleBpmRequest(request, LoadProp.finaclePreProdBpmUrl,LoadProp.freezeAccountAppCode);
                     break;
                 }
                 case TOKEN_VALIDATION:{
-                    logger.info("Welcome To tokenvalidation");
+                    logger.info("Welcome To token validation");
                     sendSoapRequest(request, LoadProp.tokenAuthenticationUrl,LoadProp.tokenAuthenticationAction);
                     break;
                 }
@@ -160,6 +165,7 @@ public class doComms implements Runnable, Constants {
                 case SPECIAL_ACCOUNT: {
                     logger.info("Welcome To FETCH SPECIAL api call");
                     sendFinacleBpmRequest(request,LoadProp.finaclePreProdBpmUrl,LoadProp.fetchCaaAcctAppCode);
+                    break;
                 }
                 case SEARCH_TRANSACTION:{
                     logger.info("Welcome To Search Transaction api call");
@@ -641,7 +647,7 @@ public class doComms implements Runnable, Constants {
         }
     }
 
-    public void sendFinacleBpmRequest(String request, String endpoint, String appCode) throws IOException {
+    private void sendFinacleBpmRequest(String request, String endpoint, String appCode) throws IOException {
         try {
             String  output = new ConnectToFinacle().callService(request,endpoint,appCode);
             logger.info("Response Final==" + output);
@@ -655,7 +661,7 @@ public class doComms implements Runnable, Constants {
         }
     }
 
-    public void sendFinacleFiRequest (String request,String endpoint,String appCode) throws IOException {
+    private void sendFinacleFiRequest (String request,String endpoint,String appCode) throws IOException {
         try {
             String  output = new ConnectToFinacle().callServiceFI(request, endpoint,appCode);
             logger.info("Response Final==" + output);
@@ -668,7 +674,7 @@ public class doComms implements Runnable, Constants {
             writeData(result);
         }
     }
-    public void sendSoapRequest(String request, String endpoint, String soapAction) throws IOException {
+    private void sendSoapRequest(String request, String endpoint, String soapAction) throws IOException {
 
         try {
             String output = new ConnectToExternalWebService().callService(request, endpoint,soapAction);

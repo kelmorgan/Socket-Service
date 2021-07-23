@@ -8,9 +8,6 @@ public interface Constants {
     String REMOVE_LIEN = "REMOVELIEN";
     String CP_POSTING ="postRequestToFinacleCp";
     String FETCH_LIEN = "FETCHLIEN";
-    String OLD_CURRENT_ACCOUNT = "OLDCURRENTACCOUNT";
-    String OLD_SAVINGS_ACCOUNT = "OLDSAVINGACCOUNT";
-    String OLD_SPECIAL_ACCOUNT = "OLDSPECIALACCOUNT";
     String CURRENT_ACCOUNT = "CURRENTACCOUNT";
     String SAVINGS_ACCOUNT = "SAVINGACCOUNT";
     String SPECIAL_ACCOUNT = "SPECIALACCOUNT";
@@ -22,10 +19,6 @@ public interface Constants {
     String IRAW_POSTING = "postIrawRequestToFinacle";
     String IRAW_OFFICE_ACCOUNT_DETAILS = "fetchIrawOfficeAcctDetails";
     String IRAW_STAFF_DETAILS = "fetchIrawstaffDetails";
-    String IRAW_ACCOUNT_DETAILS = "fetchIrawAccountDetails";
-    String IRAW_INCOME_CHARGE_ACCOUNT_DETAILS = "fetchIrawIncomechargeAccountDetails";
-    String IRAW_POST_FINACLE_INCOME_ACCOUNT= "IrawPostFinacleIncomeAccountChargeableList";
-    String IRAW_POST_FINACLE_DEBIT_TO_ONE_ACCOUNT = "IrawPostFinacleDebitToOneAccount";
     String LMT_ENHANCEMENT_STAFF_DETAILS_1 ="Fetch_limit_Enh_Details_INITIATORID";
     String LMT_ENHANCEMENT_STAFF_DETAILS_2 ="Fetch_limit_Enh_Details_VERIFIERID";
     String LMT_ENHANCEMENT_STAFF_DETAILS_3 ="Fetch_limit_Enh_Details_verifier2ID";
@@ -39,6 +32,7 @@ public interface Constants {
     String PLACE_LIEN = "placeLien";
     String CI_STAFF_DETAILS = "FetchCIStaffDetails";
     String FREEZE_ACCOUNT = "FREEZEACCOUNT";
+    String STAFF_DETAILS= "STAFFDETAILS";
 
     //AppCode
     String FINACLE_POSTING_APPCODE = "FINACLE_POST";
