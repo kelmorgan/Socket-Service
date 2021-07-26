@@ -40,6 +40,7 @@ public class ConnectToFinacle {
 	                       logger.info("SOAPAction : " + ipXML);
 				       
 				getResponse = urlString+"?appCode=" + URLEncoder.encode(appCode, "UTF-8") + "&FIData="+ URLEncoder.encode(ipXML, "UTF-8");
+				System.out.println("Final requestXml "+ getResponse);
 				URL url = new URL(getResponse);
 	                        connection = url.openConnection();
 	                        connection.setDoOutput(true);
@@ -98,6 +99,7 @@ public class ConnectToFinacle {
 	                       logger.info("SOAPAction : " + ipXML);
 				       
 				getResponse = urlString+"?AppCode=" + URLEncoder.encode(appCode, "UTF-8") + "&FIData="+ URLEncoder.encode(ipXML, "UTF-8");
+				System.out.println("Final request "+ getResponse);
 				URL url = new URL(getResponse);
 	                        connection = url.openConnection();
 	                        connection.setDoOutput(true);
