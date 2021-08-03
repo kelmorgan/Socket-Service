@@ -17,6 +17,7 @@ public class LoadProp implements Constants {
     public static String avrSearchUrl;
     public static String tokenAuthenticationUrl;
     public static String fetchAccountBvnUrl;
+    public static String fetchLegacyAccountUrl;
 
     public static String postAppCode;
     public static String removeLienAppCode;
@@ -34,6 +35,7 @@ public class LoadProp implements Constants {
     public static String freezeAccountAppCode;
     public static String tokenAuthenticationAction;
     public static String bvnAction;
+    public static String fetchLegacyAccountAction;
     static {
         try {
             Properties properties = new Properties();
@@ -51,6 +53,7 @@ public class LoadProp implements Constants {
             avrSearchUrl= properties.getProperty(AVRSEARCHURL);
             tokenAuthenticationUrl= properties.getProperty(TOKENAUTHENTICATIONURL);
             fetchAccountBvnUrl= properties.getProperty(ACCOUNTBVNURL);
+            fetchLegacyAccountUrl= properties.getProperty(LEGACYACCOUNTURL);
 
             //AppCode
             postAppCode = properties.getProperty(FINACLE_POSTING_APPCODE);
@@ -71,6 +74,8 @@ public class LoadProp implements Constants {
             //Soap Action
             tokenAuthenticationAction = properties.getProperty(TOKENATHENTICATIONACTION);
             bvnAction = properties.getProperty(BVNACTION);
+            fetchLegacyAccountAction= properties.getProperty(LEGACYACCOUNTACTION);
+
         }
         catch (IOException e){
             e.printStackTrace();

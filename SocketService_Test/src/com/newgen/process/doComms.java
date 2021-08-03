@@ -121,6 +121,11 @@ public class doComms implements Runnable, Constants {
             logger.info("callName==" + serviceName);
 
             switch (serviceName){
+                case LEGACY_ACCOUNT:{
+                    logger.info("Welcome To Legacy account details service");
+                    sendSoapRequest(request,LoadProp.fetchLegacyAccountUrl,LoadProp.fetchLegacyAccountAction);
+                    break;
+                }
                 case STAFF_DETAILS: {
                     logger.info("Welcome To staff details service");
                     sendSoapRequest(request,LoadProp.fetchStaffDetailsUrl,empty);
