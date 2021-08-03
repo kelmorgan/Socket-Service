@@ -33,6 +33,9 @@ public class LoadProp implements Constants {
     public static String updateCorpRiskScoreAppCode;
     public static String placeLienAppCode;
     public static String freezeAccountAppCode;
+    public static String freezeUnfreezeAcctAppCode;
+
+
     public static String tokenAuthenticationAction;
     public static String bvnAction;
     public static String fetchLegacyAccountAction;
@@ -70,6 +73,7 @@ public class LoadProp implements Constants {
             updateCorpRiskScoreAppCode = properties.getProperty(UPDATE_CORP_RISK_SCORE_APPCODE);
             placeLienAppCode = properties.getProperty(PLACE_LIEN_APPCODE);
             freezeAccountAppCode = properties.getProperty(FREEZE_ACCOUNT_APPCODE);
+            freezeUnfreezeAcctAppCode = properties.getProperty(FREEZE_UNFREEZE_ACCT_APPCODE);
 
             //Soap Action
             tokenAuthenticationAction = properties.getProperty(TOKENATHENTICATIONACTION);
