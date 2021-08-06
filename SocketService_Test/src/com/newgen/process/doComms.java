@@ -1,8 +1,8 @@
 package com.newgen.process;
 
 import com.newgen.main.NG_Socket_Service;
-import com.newgen.makeCall.ConnectToFinacle;
 import com.newgen.makeCall.ConnectToExternalWebService;
+import com.newgen.makeCall.ConnectToFinacle;
 import com.newgen.util.Constants;
 import com.newgen.util.LoadProp;
 import com.newgen.util.XMLParser;
@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Properties;
 import java.util.logging.Level;
 
 //--------------------------------------------------------------------------------------------------
@@ -260,7 +259,7 @@ public class doComms implements Runnable, Constants {
                 }
                 case IRAW_OFFICE_ACCOUNT_DETAILS:{
                     logger.info("Welcome To fetchIrawOfficeAcctDetails");
-                    sendSoapRequest(request,LoadProp.fetchInternalAccountUrl,empty);
+                    sendSoapRequest(request,LoadProp.fetchInternalAccountUrl,LoadProp.fetchInternalAccountAction);
                     break;
                 }
 

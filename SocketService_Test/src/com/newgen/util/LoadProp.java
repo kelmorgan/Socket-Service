@@ -39,6 +39,7 @@ public class LoadProp implements Constants {
     public static String tokenAuthenticationAction;
     public static String bvnAction;
     public static String fetchLegacyAccountAction;
+    public static String fetchInternalAccountAction;
     static {
         try {
             Properties properties = new Properties();
@@ -75,10 +76,12 @@ public class LoadProp implements Constants {
             freezeAccountAppCode = properties.getProperty(FREEZE_ACCOUNT_APPCODE);
             freezeUnfreezeAcctAppCode = properties.getProperty(FREEZE_UNFREEZE_ACCT_APPCODE);
 
+
             //Soap Action
             tokenAuthenticationAction = properties.getProperty(TOKENATHENTICATIONACTION);
             bvnAction = properties.getProperty(BVNACTION);
             fetchLegacyAccountAction= properties.getProperty(LEGACYACCOUNTACTION);
+            fetchInternalAccountAction = properties.getProperty(INTERNALACCOUNTACTION);
 
         }
         catch (IOException e){
