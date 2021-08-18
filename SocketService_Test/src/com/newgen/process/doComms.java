@@ -122,7 +122,7 @@ public class doComms implements Runnable, Constants {
             switch (serviceName){
                 case FREEZE_UNFREEZE_ACCT:{
                     logger.info("Welcome To Freeze Unfreeze Acct api call");
-                    sendFinacleFiRequest(request,LoadProp.finaclePreProdFiUrl,LoadProp.fetchOdaAcctAppCode);
+                    sendFinacleFiRequest(request,LoadProp.finaclePreProdFiUrl,LoadProp.freezeUnfreezeAcctAppCode);
                     break;
                 }
                 case LEGACY_ACCOUNT:{
